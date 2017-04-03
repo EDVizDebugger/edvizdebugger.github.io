@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Lato|Cabin+Sketch" rel="stylesheet">
+    <title>Changelog</title>
+
+    <script src="js/jquery-2.2.4.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <script src="js/functions.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+</head>
+<body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
+
+<button id="to-top" class="btn btn-primary" onclick="moveTo(0);">Go to top</button>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="edviz" class="navbar-brand" href="#">EDViz</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="collapse" style="clear:none;">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="faq.html">FAQ</a>
+                </li>
+                <li>
+                    <a href="manual_en.html">Manual</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tutorials<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="binarytree.html">Binary Tree</a></li>
+                        <li><a href="arraylist.html">Array List</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <a href="download.html" class="btn btn-success">Download</a>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="documentation.html">Documentation</a>
+                </li>
+                <li class="active">
+                    <a href="#">Changelog</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html">About us</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">License</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h2 id="title">Changelog</h2>
+
+<!-- Floating content which is usually hidden -->
+<div class="floating-content">
+    <div class="content-table"></div>
+</div>
+<button class="btn btn-default show-content" style="margin-bottom: 10px;" onclick="toggleFloatingContent()">Content</button>
+
+
+<div class="content">
+    <h3>Content</h3>
+    <div class="content-table"></div>
+</div>
+
+<div class="main" style="margin-bottom: 50px;">
+
+    <div id="v_031">
+        <h4>0.3.1</h4>
+
+        <ul>
+            <li>
+                Add a section of advanced rules. These rules add functionality not existing with rules using the domain-specific language. These rules require knowledge of the actual code behind EDViz and are therefore really mainly meant for developers to use.
+            </li>
+        </ul>
+    </div>
+
+    <div id="v_030">
+        <h4>0.3.0</h4>
+
+        <ul>
+            <li>
+                Various bugfixes.
+            </li>
+            <li>
+                Font changes are applied to browser-specific windows as well. The font-style of the main drawing area can also be specified in the settings dialog.
+            </li>
+            <li>
+                Rule editors are automatically updated when changes are made, for example by adding a blacklist element with a right-click action.
+            </li>
+            <li>
+                Arrays are now always ordered naturally by default. This ordering may be overridden with an ordering constraint for specific arrays.
+            </li>
+            <li>
+                Some default rules for binary trees can be given in the settings, allowing for example to always treat a <b>left</b> pointer to belong to a binary tree and order it to the left of a <b>right</b> pointer. These default orderings can always be overridden with an ordering constraint for specific types.
+            </li>
+            <li>
+                Can specify names of fields which typically need to inverted in the settings, e.g. <b>previous</b> pointers for a doubly linked list or <b>parent</b> pointers for a tree structure.
+            </li>
+            <li>
+                Can right-click values to evaluate expressions on them. These expressions may either be evaluating certain methods for a value, or visualizing a set of fields for a value. These expressions are updated any time that the main graph is updated.
+            </li>
+        </ul>
+
+    </div>
+
+    <div id="v_029">
+        <h4>0.2.9</h4>
+
+        <ul>
+            <li>
+                Various bugfixes.
+            </li>
+            <li>
+                Regrouped some right-click operations, adding default ordering constraints which can be added directly now.
+            </li>
+            <li>
+                Improved the automated code correction (beta) tool. Now accepts partial edits which may be performed, without having to change the graph on screen entirely.
+            </li>
+            <li>
+                Simplified installation, and added an action to load a new configuration from file.
+            </li>
+        </ul>
+
+    </div>
+
+    <div id="v_028">
+        <h4>0.2.8</h4>
+
+        <ul>
+            <li>
+                Simplified approach to reload the view. In the settings dialog, whenever a setting is changed which requires the view to be reloaded, it is automatically reloaded upon apply. The load configuration action also offers to reload the view.
+            </li>
+        </ul>
+    </div>
+
+    <div id="v_ne_new_new">
+        <h4>0.2.7</h4>
+
+        <ul>
+            <li>
+                Changed the name of the plug-in to EDViz. Apparently, that required a new release.
+            </li>
+        </ul>
+    </div>
+
+    <div id="v_new_new">
+        <h4>0.2.6</h4>
+
+        <ul>
+            <li>
+                Editors for the ordering constraints, string formats, abstraction rules and blacklist rules now give better feedback. Any query accepted by them is guaranteed to be syntactically valid. Together with this, the domain-specific language changed slightly, particularly now brackets are needed for the different parts of an ordering constraint.
+            </li>
+
+            <li>
+                Installation is now far easier. No separate folder needs to be maintained, and installation directly from the website is possible.
+            </li>
+
+            <li>
+                Change of configuration file can be specified directly in the tool. Allows to switch between different configuration files much easier.
+            </li>
+
+            <li>
+                No double scrollbars for most browser-based elements. Only the manual may still contain a double scrollbar.
+            </li>
+
+            <li>
+                Added some nice symbols for some actions.
+            </li>
+        </ul>
+    </div>
+
+    <div id="v_new">
+        <h4>0.2.5</h4>
+
+        <ul>
+            <li>
+                Add a new Settings dialog replacing the previous dialog to change the language. The settings dialog covers a much larger spectrum of configuration options.
+            </li>
+            <li>
+                Right-click settings are now organized in groups. This allows adding more settings while at the same time making it easier to look at.
+            </li>
+            <li>
+                Added various rule adding options to the right-click menu, which can add often-used rules. Furthermore, right-click options to prepopulate a new rule with are added, making it often much easier to add new ordering constraints, string formats or blacklist rules.
+            </li>
+            <li>
+                Add usage data gathering. Some small amount of usage data is gathered by default. This may be turned off in the settings. The gathered data is fully anonymous. Currently, the mode of usage (interactive mode, whether static variables are analyzed), standard data for graph layout (how many nodes, edges, how long it took) and how many rules are configured (but not their contents) are gathered. The files are stored locally and not sent to a server yet.
+            </li>
+        </ul>
+
+    </div>
+
+    <div id="v">
+        <h4>0.2.4</h4>
+
+        <ul>
+            <li>
+                The heap analysis can now be cancelled. Attempts to analyze large heaps are therefore now safe, as even if the analysis is very long-running, it can be cancelled.
+            </li>
+            <li>
+                Editing constraints, string formats, blacklist and abstraction and pressing the <b>Apply</b> button now applies the changes immediately, without the necessity to restart debugging the program or to continue to the next step.
+            </li>
+            <li>
+                Improved graph drawing area performance while moving nodes. Moving nodes over the border of the area now animates the growing area more smoothly. Furthermore, node moving efficiency is drastically improved, allowing medium sized graphs to be moved entirely with reasonable performance.
+            </li>
+            <li>
+                The blacklist is now partially applied while analyzing the heap. The most common case of blacklisting certain fields of a given type is now already handled during heap analysis for objects with many fields. Therefore, large heaps which are blacklisted for the most part can now be efficiently analyzed, without needing to resort to interactive mode.
+            </li>
+            <li>
+                Expansion level in the interactive mode is stored. This means that expanding a node to a certain level once will keep expanding that node in later iterations, allowing to keep the same view over multiple iterations without additional necessity for expansion.
+            </li>
+            <li>
+                Expansion can be removed from nodes. This allows to only temporarily expand nodes and hide them again afterwards. Removing expansion from a node is stored and can be overwritten forcefully by expanding that specific node or fully expanding a node above it in the hierarchy.
+            </li>
+            <li>
+                Language selection can be closed by clicking the <b>Change Language</b> button once again. Therefore language selection now is never displayed more than once.
+            </li>
+        </ul>
+    </div>
+
+    <div id="vv">
+        <h4>0.2.3</h4>
+
+        <ul>
+            <li>
+                Add interactive mode. Interactive mode allows to specify the nodes to expand manually, while only the variables are shown at the beginning. This brings performance improvements for large heaps, as not the entire heap needs to be analyzed. Interactive mode can be activated at any time. Whether the tool starts up in interactive mode can be defined in the configuration.
+            </li>
+            <li>
+                The layout algorithm can now be cancelled. This allows to analyze large heaps without the risk of Eclipse being unresponsive for a large amount of time.
+            </li>
+            <li>
+                Eclipse stays responsive even during long-running operations such as heap analysis or the graph layout algorithm.
+            </li>
+            <li>
+                Certain operations opening within a browser are now toggled, instead of generating a separate button to close the windows.
+            </li>
+        </ul>
+    </div>
+
+    <div id="vvv">
+        <h4>0.2.2</h4>
+
+        <ul>
+            <li>
+                The graph drawing area automatically resizes for large graphs, instead of drawing the large graph in the small area. This improves visualization capabilities for large data structures immensely.
+            </li>
+        </ul>
+    </div>
+
+</div>
+</body>
+
+</html>

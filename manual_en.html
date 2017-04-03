@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Lato|Cabin+Sketch" rel="stylesheet">
+    <title>Manual</title>
+
+    <script src="js/jquery-2.2.4.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <script src="js/functions.js"></script>
+    <script src="js/manual.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+</head>
+<body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
+
+<button id="to-top" class="btn btn-primary" onclick="moveTo(0);">Go to top</button>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="edviz" class="navbar-brand" href="#">EDViz</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="collapse" style="clear:none;">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="faq.html">FAQ</a>
+                </li>
+                <li class="active">
+                    <a href="#">Manual</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tutorials<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="binarytree.html">Binary Tree</a></li>
+                        <li><a href="arraylist.html">Array List</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <a href="download.html" class="btn btn-success">Download</a>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="documentation.html">Documentation</a>
+                </li>
+                <li>
+                    <a href="changelog.html">Changelog</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html">About us</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">License</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h2 id="title">Manual</h2>
+
+<!-- Floating content which is usually hidden -->
+<div class="floating-content">
+    <div class="content-table"></div>
+</div>
+<button class="btn btn-default show-content" style="margin-bottom: 10px;" onclick="toggleFloatingContent()">Content</button>
+
+
+<div class="content">
+    <h3>Content</h3>
+    <div class="content-table"></div>
+
+</div>
+
+<div class="main" style="margin-bottom: 50px;">
+
+    <div id="installation">
+        <h3>Installation</h3>
+
+        <div class="alert alert-info alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            Prefer videos? We've got you covered! Check out our <a href="https://youtu.be/a-kGCKkxtcE">installation video</a>.
+        </div>
+
+        <p>The tool can be installed directly from an update site within Eclipse. To install the tool, the following tasks need to be performed:</p>
+        <ol>
+            <li>
+                Open <b>Eclipse</b>, and open the <b>Install New Software</b> dialog.
+                <br>
+                <img src="images/install_new_software.jpg"/>
+            </li>
+            <li>
+                In this dialog, add a new software site to install plug-ins from (or choose the one which you already added, if you are updating the plug-in). In the dialog given below, enter the URL <b>http://n.ethz.ch/~csteimer/update</b>, and optionally give it a name so that you can recognize it again.
+                <br>
+                <img src="images/software_site_1.jpg"/>
+                <br>
+                <img src="images/software_site_2.jpg"/>
+            </li>
+            <li>
+                It can happen that no plug-ins are shown. There can be two cases: Either you already have the newest version of the tool, in which case you can skip the installation. Otherwise, make sure that the option <b>Group items by category</b> is not checked.
+                <br>
+                <img src="images/group_by.jpg" width="500"/>
+            </li>
+            <li>
+                Choose the plug-in called <b>EDViz</b> and press <b>Next</b>. To through the following dialogs and accept the license as well. Afterwards, a <b>Security Warning</b> might pop up. In that case, just ignore it and press <b>OK</b>. Finally, the plug-in will be installed, and Eclipse will prompt to restart. The tool has been successfully installed.
+            </li>
+        </ol>
+    </div>
+
+    <div id="features">
+        <h3>Features</h3>
+
+        <p>The DebugTool is an Eclipse-plugin which can be used to debug Java programs. It features a main drawing area of customizable size, where the heap structure as given at breakpoints is laid out on screen. The tool is particularly suited to developing new data structures and small heaps. The following features are a part of the tool:</p>
+
+        <ul>
+            <li>
+                <p><b>Visual debugging</b>: Instead of clicking through a bunch of values in a list to painfully decide whether the data structure looks correct, the data structure is simply drawn on the screen. This allows much quicker understanding of the correctness of the data structure. It also makes understanding concepts such as aliasing easier - there are simply two edges to the same node.</p>
+                Before and after:
+                <br>
+                <br>
+                <div id="before_and_after">
+                    <table>
+                        <tr>
+                            <th><button class="btn btn-default disabled" style="font-size: 2em;">&lt;</button></th>
+                            <th><img src="images/debugging_before.JPG"/></th>
+                            <th><button class="btn btn-default" style="font-size: 2em;" onclick="switchBeforeAndAfter()">&gt;</button></th>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+            <li style="clear: both">
+                <b>General purpose</b>: The tool is not limited to debug only a limited set of programs. Any program can be debugged and visualized with the tool. Ever wondered how a Java <b>HashMap</b> is implemented? Use the tool and visualize it! Almost any data structure can be visualized if <a href="#configuration">configured</a> correctly.
+            </li>
+            <li>
+                <p><b>New layout algorithm</b>: A new graph layout algorithm is part of the tool. The layout algorithm is particularly suited to data structures and debugging due to two main features.</p>
+                <p>When developing data structures, there is often a clear notion of ordering. For example, when laying out a binary tree, one certainly wants the <b>left</b> child to be drawn to the left of its sibling. This algorithm takes this into account by allowing user-defined ordering constraints. Therefore the tool is also not limited to a fixed set of pre-defined data structures, but rather new structures can be developed by users and the layout algorithm configured for those structures.</p>
+                <p>Secondly, the user can use the graph to create a mental map of the entire heap layout. The graph layout algorithm takes previous layouts into account and therefore tries to produce layouts which not only fulfill general graph drawing aesthetics - but also stay temporally consistent where possible.</p>
+            </li>
+            <li>
+                <b>Integration with Eclipse</b>: The tool is tightly integrated with the Eclipse IDE. For one, when opened it listens to breakpoints being hit and is therefore usable without any manual linking to Eclipse. The integration goes further, however: Right-clicking values allows to inspect them by using Eclipse's existing inspection capabilities. This makes it much easier to find the correct value to inspect than having to look through the structure in the existing Eclipse user interface.
+            </li>
+            <li>
+                <b>Visually appealing design</b>: Using modern visualization frameworks such as <a href="http://d3js.org">D3.js</a> and web frameworks such as <a href="http://getbootstrap.com/">Bootstrap</a>, the tool has a modern look and feel. The tool also profits from existing animation capabilities and the strength of SVG editors.
+            </li>
+            <li>
+                <b>Configurability</b>: The tool comes with its own <a href="#configuration">configuration</a> file, which allows configuring large parts of it. Furthermore, relying on web frameworks for visualization means that changing the look of the visualization can be done as one is used to - by editing <b>.css</b> files.
+            </li>
+            <li id="interactive_mode">
+                <b>Interactive mode</b>: The interactive mode allows debugging larger heaps than usual. All variables are initially not analyzed. Values need to be specifically expanded to draw larger portions of the heap, allowing you to debug precisely what you want to have debugged. The tool remembers whether values are expanded or not and automatically expands the appropriate values at the next breakpoints.
+            </li>
+        </ul>
+
+    </div>
+
+    <div id="usage">
+        <h3>Usage</h3>
+
+        <div class="alert alert-info alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            Prefer videos? We've got you covered! Check out our <a href="https://youtu.be/zVaOn4yLwHQ">getting started video</a>.
+        </div>
+
+        <p>EDViz can be used to debug Java programs written in Eclipse. The tool is most suited to simple and small data structures such as linked lists, binary trees or hash maps, however not strictly limited to them. To use the tool to debug Java programs, the following steps are necessary:
+        <ul>
+            <li>
+                Open the view. This can be done using Window > Show View > Other... > EDViz.
+            </li>
+            <li>
+                Set breakpoints as usual.
+            </li>
+            <li>
+                It might be necessary to <a href="#configuration">configure</a>  the tool for use with your program, for example if you introduce a new data structure which is unknown to the tool.
+            </li>
+            <li>
+                Debug the program. At each breakpoint, additionally to the usual Eclipse behavior, the current state of the heap will be shown on screen.
+            </li>
+        </ul>
+        <p>The following is a screenshot of the tool in action, displaying a simple binary tree data structure:
+            <br>
+            <img src="images/tool_full.JPG"/>
+            <br>
+    </div>
+
+    <div id="action">
+        <h3>Actions</h3>
+
+        <p>While debugging a program, various actions can be taken. They are listed at the top of the debug tool. The actions which can be performed can be seen in the below screenshot and are explained here in more detail.</p>
+        <ul>
+            <li>
+                <b>Reload</b>: Redraws the current graph. Redrawing the graph can be necessary after changing settings to see the effect of the changes.
+            </li>
+            <li>
+                <b>Cancel</b>: Becomes active whenever there is a long-running operation which may be cancelled. Heap analysis and graph layout may
+            </li>
+            <li>
+                <b>Start / stop interactive mode</b>: Starts or stops <a href="#interactive_mode">interactive mode</a>, depending on whether it is currently active.
+            </li>
+            <li>
+                <b>Manage abstractions</b>: The existing abstraction rules can be activated and deactivated.
+            </li>
+            <li>
+                <b style="font-size: 1.5em;">&#x2190;</b>: Loads the previous graph on screen again, such that changes between two breakpoints can be clearlier investigated.
+            </li>
+            <li>
+                <b style="font-size: 1.5em;">&#x2192;</b>: Loads the subsequent graph on screen again.
+            </li>
+            <li id="edit_constraints">
+                <b>Edit constraints</b>: This action opens an interface, where specifically the <a href="#ordering_constraints">ordering constraints</a> section of the configuration may be edited. Changes here can be only applied (such that they are active, but not persisted to file) or saved to file.
+            </li>
+            <li id="edit_abstractions">
+                <b>Edit abstractions</b>: This action opens an interface, where specifically the <a href="#abstractions">abstractions</a> section of the configuration may be edited.
+            </li>
+            <li id="edit_string_formats">
+                <b>Edit string formats</b>: This action opens an interface, where specifically the <a href="#string_formats">string formats</a> section of the configuration may be edited.
+            </li>
+            <li id="edit_blacklist">
+                <b>Edit blacklist</b>: This action opens an interface, where specifically the <a href="#blacklist">blacklist</a> section of the configuration may be edited.
+            </li>
+            <li id="settings">
+                <b>Settings</b>: Opens a settings dialog where the most important settings can be changed. Some of these settings are applied immediately, while others require the view to be re-opened. Applying the settings reloads the view if a restart is required by any of the settings. Manually reloading the view to apply any setting is never necessary.
+            </li>
+            <li>
+                <b>Manual</b>: Opens this manual in a browser window within the tool.
+            </li>
+            <li id="fix_bugs_action">
+                <b>Fix bugs</b>: A <a href="#beta">beta</a> feature which can automatically fix certain bugs. If the beta mode is not active, then this action will not be available.
+            </li>
+            <li id="load_config">
+                <b>Load configuration</b>: Instead of the default configuration file, you may optionally specify a different configuration file to load. The configuration file may also be reset to use the default configuration file again. This action also shows you the location of the default configuration file if you need to manually edit, as long as no other configuration file is loaded. To finish loading a configuration, reload the view by using the <b>Reload</b> button to reload the view.
+            </li>
+        </ul>
+    </div>
+
+    <div id="configuration">
+        <h3>Configuration</h3>
+
+        <p>The <b>config.json</b> file in the plugin folder allows to configure various things. The following options can be configured directly in the file. The more important options are available in the <a href="#settings">settings</a> dialog, or through one of the different editors for <a href="#ordering_constraints">ordering constraints</a>, <a href="#string_formats">string formats</a>, <a href="#blacklist">blacklist</a> or <a href="#abstractions">abstraction rules</a>. If changes are made directly to the file, Eclipse will need to be restarted for them to take effect. Changes made with the different dialogs are applied immediately. Editing the configuration file directly should only be performed by expert users.</p>
+        <p>Optionally, you may specify another configuration file to use through the <b>Load configuration</b> action. This allows you to have multiple configuration files and swap between them, for example to test certain behavior without destroying the original configuration file. The <b>Load configuration</b> action also shows you the default location of the configuration file.</p>
+        <ul>
+            <li>
+                <b>constraints</b>: Ordering, positioning and cycle-removal constraints. The positioning and cycle-removal constraints need to be adapted only in rare cases. See the <a href="#ordering_constraints">ordering constraints</a> section for a more in-depth look at ordering constraints.
+            </li>
+            <li>
+                <b>toStringFormats</b>: See the <a href="#string_formats">string formats</a> section.
+            </li>
+            <li>
+                <b>abstractions</b>: See the <a href="#abstractions">abstractions</a> section.
+            </li>
+            <li>
+                <b>blacklist</b>: "See the <a href="#blacklist">blacklist</a> section.
+            </li>
+            <li>
+                <b>graphDrawer</b>: Allows to choose how the graphs are drawn on screen. <b>browser</b> is the default and most supported value. The other values should mainly be used if issues with the browser version occur. <b>swt</b> draws the graph within a Canvas in the same space, while <b>swing</b> draws the graph in a separate window.
+            </li>
+            <li>
+                <b>analyzeStatic</b>: <b>false</b> is the default value. If set to <b>false</b>, then static fields will be ignored by the tool. If set to <b>true</b>, static fields will be handled in the same way as instance fields.
+            </li>
+            <li>
+                <b>letterWidth</b>: Describes the width of a single letter for the layout phase. The larger the value, the wider the box around a value in the graph will be. Note however, that all boxes will be compressed if the total width can't fit on screen. This should be set together with the <a href="#font">font</a> attributes.
+            </li>
+            <li>
+                <b>width</b>: The width of the drawing area on screen in pixels.
+            </li>
+            <li>
+                <b>height</b>: The height of the drawing area on screen in pixels.
+            </li>
+            <li>
+                <b>isBeta</b>: If set to <b>true</b>, then <a href="#beta">beta</a> features will be activated.
+            </li>
+            <li id="font">
+                <b>fontInfo</b>: Allows setting various attributes with regard to the font used. The following attributes exist here:
+                <ul>
+                    <li>
+                        <b>fontName</b>: The name of the font to be used. This name is written in the font-file to be used and must match it, otherwise the default system font will be used.
+                    </li>
+                    <li>
+                        <b>swtFontSize</b>: The size of the font used in SWT components. This generally should be around 30% lower than <b>swingFontSize</b>, which is the size of the font used in Swing components.
+                    </li>
+                    <li>
+                        <b>fontFile</b>: The name of the file located in <b>debugtool/fonts</b> from where the font should be loaded.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <b>colors</b>: Allows setting the colors of the different types of values and variables in the drawing area differently from the default colors. This setting is not required.
+                <ul>
+                    <li>
+                        <b>array</b>: Color of array values. All colors shall be given in the format <b>#RRGGBB</b> in the usual hexadecimal format. Default color: <div class="color-box" style="background-color: #BAB1AE;"><b>#BAB1AE</b></div>
+                    </li>
+                    <li>
+                        <b>object</b>: Color of usual Java values. Default color: <div class="color-box" style="background-color: #F4F1BB"><b>#F4F1BB</b></div>
+                    </li>
+                    <li>
+                        <b>primitive</b>: Color of primitive values. Default color: <div class="color-box" style="background-color: #E6CCBE"><b>#E6CCBE</b></div>
+                    </li>
+                    <li>
+                        <b>null</b>: Color of null values. Default color: <div class="color-box" style="background-color: #ED6A5A"><b>#ED6A5A</b></div>
+                    </li>
+                    <li>
+                        <b>variable</b>: Color of variables. Default color: <div class="color-box" style="background-color: #C7E8F3"><b>#C7E8F3</b></div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <b>quadProgSolver</b>: The solver to use for the on-screen layout. This should generally not need to be changed, as the default <b>joptimizer</b> version is the most efficient and most general version anyway.
+            </li>
+            <li>
+                <b>languageFile</b>: The language file as located in <b>debugtool/languages</b> which should be used. Note that this should better be changed with the <a href="#change_language">change language</a> action.
+            </li>
+            <li>
+                <b>interactiveMode</b>: If set to <b>true</b>, the tool will start up in <a href="#interactive_mode">interactive mode</a>. The mode can also be changed while the tool is running, this just changes the start-up option.
+            </li>
+            <li>
+                <b>debug</b>: If set to <b>true</b>, additional debug output will be generated in <b>debugtool/.debug</b>. Default value is <b>false</b> and should only be changed if debug output must be supplied to fix bugs in the tool.
+            </li>
+        </ul>
+
+        <div id="ordering_constraints">
+            <h4>Ordering constraints</h4>
+
+            <p>The ordering constraints are stored in the <a href="#configuration">configuration</a> under <b>constraints > queries</b> in the form of an array of constraints. They can easily be edited using the <a href="#edit_constraints">edit constraints</a> action. These constraints decide on the horizontal ordering of the values displayed in the graph on screen.</p>
+
+            <p>Right-clicking on values with two or more fields allows an ordering constraint to be added directly for that value's type, as an easier alternative. That option can be found in the context menu under <b>Rules &rarr; Write order constraint for type X</b>, where <b>X</b> will be replaced by the value's actual type. There is no semantic difference between an ordering constraint added that or any other way, it's just a simplification of the process.</p>
+
+            <p>Each of the constraints has three parameters. These parameters are the following:
+            <ul>
+                <li>
+                    <b>query</b>: Based on the query it is decided on which values to apply the ordering constraint. Generally, each query can match zero, one or multiple values. The query can have one of two forms:
+                    <ol>
+                        <li>
+                            <b>typeName.something</b>: Here, <b>typeName</b> refers to some Java type, and <b>something</b> dereferences some fields from that type. <b>something</b> can dereference multiple fields in a row, e.g. <b>f1.f2</b> or also be empty. Then the matching values will be anything dereferenced by <b>something</b> of all the values of the given Java type. Note that Java types which are contained in packages must have the dots in their names replaced by /. This means that e.g. <b>java.util.String</b> must be converted to <b>java/util/String</b>.
+                        </li>
+                        <li>
+                            <b>variableName.something</b>: Here, <b>variableName</b> refers to the name of a variable in the program, and <b>something</b> works the same way as given above, by being dereferenced on the variable's value.
+                        </li>
+                    </ol>
+                    To refer to all fields of an array, you may use any single character. For example, <b>array.i</b> will let <b>i</b> refer to all fields of the given array. <b>i</b> can then be used to refer to the array elements in the order.
+                </li>
+                <li>
+                    <b>quantifier</b>: The quantifier decides to which of the values matched by the query the ordering constraint should be applied. Currently there is only one quantifier: <b>all</b>, which applies the ordering constraint to all values matched by the query.
+                </li>
+                <li>
+                    <b>order</b>: The left-to-right order in which the fields of the matched values should be drawn. The order is applied to each matched value separately. In the order, fields of the matched values can be used. Generally, all matched values should have the same type and therefore the same fields. Some examples:
+                    <ol>
+                        <li>
+                            <b>(f1)&lt;(f2)</b>: For each matched value, field <b>f1</b> should be ordered to the left of field <b>f2</b>.
+                        </li>
+                        <li>
+                            <b>(f1.y)&lt;(f2.x)</b>: For each matched value, field <b>y</b> of the value in field <b>f1</b> should be ordered to the left of field <b>x</b> of the value in field <b>f2</b>.
+                        </li>
+                        <li>
+                            <b>(f1.recurse(f1))&lt;(f2.recurse(f2))</b>: The <b>recurse</b> function is special: It recursively follows the field or fields given as arguments and therefore resolves to multiple values. For example, <b>f1.recurse(f1)</b> leads to <b>f1</b>, <b>&nbsp;f1.f1</b>, <b>&nbsp;f1.f1.f1</b> and so on. Multiple fields may also be followed: <b>f1.recurse((f1|f2))</b> leads to <b>f1</b>,  <b>&nbsp;f1.f1</b>, <b>&nbsp;f1.f2</b>, <b>&nbsp;f1.f1.f1</b>, <b>&nbsp;f1.f1.f2</b> and so on. All fields of a value may be followed with <b>f1.recurse(*)</b>.
+                        </li>
+                        <li>
+                            <b>(i)&lt;(i+1)</b>: If you end the query part with <b>i</b> to refer to all children of an array, this allows to order the children of an array in their natural order.
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+
+            <div id="ordering_examples">
+                <h5>Examples</h5>
+
+                <p>Assume that you have the following <b>BinaryTree</b> class in your code:</p>
+
+                <pre>package binary;<br><br>class BinaryTree&lt;T&gt;</t> {<br>    BinaryTree&lt;T&gt; left, right;<br>    T value;<br>    ...<br>}</pre>
+
+                <p>As usual, you want <b>left</b> to be drawn to the left of <b>right</b> for all binary tree elements. Then you should add the following ordering constraint. Note that the <b>recurse(*)</b> here ensures that the entire left subtree is drawn to the left of the entire right subtree. If you omitted the <b>recurse(*)</b>, then each left sibling would be drawn to the left of its right sibling, but there would be no guarantees about the entire subtree. Also note that we call the type <b>binary/BinaryTree&lt;T&gt;</b>, we use the fully qualified name, but replacing dots with <b>/</b>.</p>
+
+                <pre>{<br>    "query": "binary/BinaryTree&lt;T&gt;",<br>    "quantifier": "all",<br>    "ordering": "(left.recurse(*))&lt;(right.recurse(*))"<br>}</pre>
+
+                <p>Assume now that you have two variables in your program, <b>root1</b> and <b>root2</b>. To order <b>root1</b> horizontally left of <b>root2</b>, add the following ordering constraint. The variables are root items, just as the types are, therefore the query is left empty.</p>
+
+                <pre>{<br>    "quantifier": "all",<br>    "ordering": "(root1)&lt;(root2)"<br>}</pre>
+
+                <p>For the last example, assume that the variable <b>root1</b> is of type <b>BinaryTree&lt;T&gt;</b>. To order only the children of that specific variable, and not all children for that type, add the following ordering constraint:</p>
+
+                <pre>{<br>    "query": "root1",<br>    "quantifier": "all",<br>    "ordering": "(left)&lt;(right)"<br>}</pre>
+
+                <p>Let's assume we have the <b>ArrayList</b> as given in the <a href="#abstraction_examples">abstraction examples</a>. To order the elements in their natural order, use the following constraints:</p>
+
+                <pre>{<br>    "query": "ArrayList.elements.i",<br>    "quantifier": "all",<br>    "order": "(i)&lt;(i+1)"<br>}</pre>
+            </div>
+        </div>
+
+        <div id="string_formats">
+            <h4>String formats</h4>
+
+            <p>The string formats are stored in the <a href="#configuration">configuration</a> under <b>toStringFormats</b> in the form of an array of string formats. They can easily be edited using the <a href="#edit_string_formats">edit string formats</a> action. Based on these string formats, the text to display within a value in the graph on screen is decided.</p>
+
+            <p>Right-clicking on a value will present some options for setting the string format of the value. Under <b>Rules &rarr; Set format of type X to {f}</b> you may set the format of all values of type <b>X</b> to show the value of their field <b>f</b> as a default option. If the default formats are not sufficient, you may choose  <b>Rules &rarr; Write format for type X</b> to write your own format for all values of the given type <b>X</b>.</p>
+
+            <p>Each of the formats has three parameters. These parameters are the following:
+            <ul>
+                <li>
+                    <b>query</b> and <b>quantifier</b>: These are the same as in the <a href="#ordering_constraints">ordering constraints</a>.
+                </li>
+                <li>
+                    <b>format</b>: Based on the format, it is decided how the text to display will look like. The format is a special string which allows for formatting based on field values: <b>{f}</b> will be replaced with the value of the field <b>f</b> in the values matched by the query and quantifier. Outside of <b>{}</b>, the string is left as-is. For example, applying <b>{key}:{value}</b> to a value with fields <b>key = Hello</b> and <b>value = 2</b> will lead to the string <b>Hello:2</b>.
+                </li>
+            </ul>
+
+            <p>If no format is applied to a value, their value by default will be as follows:
+            <ul>
+                <li>
+                    For <b>primitives</b>, the primitive value is converted to a string.
+                </li>
+                <li>
+                    For <b>arrays</b>, they are converted to <b>elementTypeName[]</b>. Arrays with a limited number of primitive values can also be converted to <b>[v1,v2,v3]</b> where <b>vi</b> are the values in the array.
+                </li>
+                <li>
+                    For <b>objects</b>, the format <b>{value}</b> is applied. If the object doesn't have a field <b>value</b>, then it is converted to the value's type name.
+                </li>
+            </ul>
+
+            <p><b>Note</b>: Cascading formats are currently not supported. Assume you have a structure <b>A &rarr; B &rarr; C</b>. Setting the format for type <b>A</b> to <b>{b}</b> and the format of type <b>B</b> to <b>{c}</b> will not show the value of <b>C</b> for the value <b>A</b>. To achieve such an effect, the format of <b>A</b> should be <b>{b.c}</b> instead.</p>
+
+            <div id="format_examples">
+                <h5>Examples</h5>
+
+                <p>Assume that you have the <b>BinaryTree</b> class as given in the <a href="#ordering_examples">ordering example</a>. Then the following format will use the <b>value</b> field as the string to display. Note that we prefix the actual value with <b>value:</b>.</p>
+
+                <pre>{<br>    "query": "binary/BinaryTree&lt;T&gt;,<br>    "quantifier": "all",<br>    "format": "value:{value}"<br>}</pre>
+
+                <p>The string to be displayed can also be hardcoded. For example, to display every <b>left</b> field of a tree as <b>left</b>, use the following format:</p>
+
+                <pre>{<br>    "query": "binary/BinaryTree&lt;T&gt;.left,<br>    "quantifier": "all",<br>    "format": "left"<br>}</pre>
+
+                <p>Now assume that you have the following <b>Entry</b> class:</p>
+
+                <pre>class Entry {<br>    int key,value;<br>    ...<br>}</pre>
+
+                <p>You can use multiple fields in the format. The following format will use both fields to generate an intuitive string describing the contents of the entry:</p>
+
+                <pre>{<br>    "query": "Entry",<br>    "quantifier": "all",<br>    "format": "{key}:{value}"<br>}</pre>
+
+                <p>Instead of type names you may also use variable names for the query. Then the format will simply be only applied to the value pointed to by the variable, and not to all values of some type. Dereferences both in the query and in the formats.</p>
+            </div>
+        </div>
+
+        <div id="abstractions">
+            <h4>Abstraction rules</h4>
+
+            <p>The abstraction rules are stored in the <a href="#configuration">configuration</a> under <b>abstractions</b> in the form of an array of abstraction rules. They can easily be edited using the <a href="#edit_abstractions">edit abstractions</a> action. Based on these rules, multiple values may be abstracted to a single value, allowing to save space on screen and draw larger heaps.</p>
+
+            <p>Each of the rules has five parameters. These parameters are the following:
+            <ul>
+                <li>
+                    <b>query</b> and <b>quantifier</b>:These are the same as in the <a href="#ordering_constraints">ordering constraints</a>.
+                </li>
+                <li>
+                    <b>comparison</b>: The comparison to compare the values matched by the query and quantifier with. Multiple comparisons may be specified by separating them with a comma and putting each comparison into normal brackets. A comparison can be of one of the following forms. Note that the <b>query</b> may be replaced by <b>*</b>, this then corresponds to all fields. The <b>query</b> has the same semantics as the <b>query</b> given above, with the <b>all</b> quantifier.
+                    <ol>
+                        <li>
+                            <b>query</b>: This is equal to <b>query==*</b>.
+                        </li>
+                        <li>
+                            <b>query==v</b>: This compares the value at <b>query</b> to the value <b>v</b>. <b>v</b> may take some special values: <b>primitive</b> checks whether the value is of a primitive type and <b>null</b> whether it is null. Comparing to <b>*</b> always returns true. Instead of <b>query</b>, also <b>*</b> may be used, which refers to all fields of the value and will therefore compare all fields of the value to <b>v</b> and return the ones that match. Using <b>this</b> allows to refer to the current value instead of any field of it. If <b>v</b> should have spaces, it must be enclosed in <b>""</b>: <b>query=="With spaces"</b>.
+                        </li>
+                        <li>
+                            <b>query!=v</b>: This is true iff <b>query==v</b> is false.
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <b>count</b>: This denotes the minimal number of values which the query has to match in order for the abstraction rule to be applied. Setting this to <b>1</b> will ensure that the abstraction will always be applied.
+                </li>
+                <li>
+                    <b>active</b>: If set to <b>false</b>, this abstraction rule will be disabled. This allows to easily deactivate abstraction rules without having to delete them.
+                </li>
+            </ul>
+
+            <div id="abstraction_examples">
+                <h5>Examples</h5>
+
+                <p>Let's assume you have some class <b>ArrayList</b> as given below:</p>
+
+                <pre>class ArrayList {<br>    Object[] elements;<br>    ArrayList() {<br>        elements = new Object[100];<br>    }<br>    ...<br>}</pre>
+
+                <p>This class has an obvious problem when trying to display it with the tool. The <b>elements</b> array has 100 elements, which will not fit on even a very large screen. However, for small programs, it's likely that this array will be mainly filled with <b>null</b> elements. These elements can be abstracted to a single element without really losing any information. The following rule will abstract them to one node, as long as there are at least five of them:</p>
+
+                <pre>{<br>    "query": "ArrayList.elements",<br>    "quantifier": "all",<br>    "comparison": *==null",<br>    "count": 5<br>}</pre>
+
+                <p>Let's assume we have two somewhat strange classes as given below:</p>
+
+                <pre>class Class1 {<br>    Class2 next;<br>    ...<br>}<br><br>class Class2 {<br>    Class1 next;<br>    ...<br>}</pre>
+
+                <p>We can now for example abstract any pair of <b>Class1 &rarr; Class2</b> objects in order to reduce the height of the heap. We can do this with the rule given below. Note that we don't add any equalities to the comparison, as we want to abstract them together regardless of their value. As we specify multiple comparisons, we must separate them by a comma and wrap them in brackets. If we started the query at <b>Class2</b>, we would be abstracting <b>Class2 &rarr; Class1</b> pairs, which is slightly different.</p>
+
+                <pre>{<br>    "query": "Class1",<br>    "quantifier": "all",<br>    "comparison": "(this),(next)",<br>    "count": 1<br>}</pre>
+
+
+            </div>
+
+        </div>
+
+        <div id="blacklist">
+            <h4>Blacklist</h4>
+
+            <p>The blacklist rules are stored in the <a href="#configuration">configuration</a> under <b>blackList</b> in the form of an array of blacklist rules. They can easily be edited using the <a href="#edit_blacklist">edit blacklist</a> action. Based on these rules, values and variables may be blacklisted, meaning that they won't appear in the graph on screen.</p>
+
+            <p>Right-clicking on a value also shows options for blacklist rules to be added. Choose <b>Rules &rarr; Blacklist field v of type X</b> to blacklist all fields <b>v</b> of some type <b>X</b>. Instead, you may also blacklist by value: <b>Rules &rarr; Blacklist value x</b> will blacklist all values which match the given comparison <b>x</b>. Lastly, you may write your own pre-filled blacklist query by choosing <b>Rules &rarr; Write blacklist for field v of type X</b> to manually write a conditional blacklist for fields <b>v</b> of some type <b>X</b>.</p>
+
+            <p>Each of the rules has three parameters. These parameters are the following:
+            <ul>
+                <li>
+                    <b>query</b> and <b>quantifier</b>: These are the same as in the <a href="#ordering_constraints">ordering constraints</a>.
+                </li>
+                <li>
+                    <b>comparison</b>: This is the same as in the <a href="#abstractions">abstraction rules</a>.
+                </li>
+            </ul>
+
+            <p>For each of these rules, the values and variables matching the rules will be resolved, and they will not be shown in the graph. This allows to remove some fields or variables which typically cause visual clutter but are not actually important to debugging, for example the <b>String[] args</b> parameter in Java main methods.</p>
+        </div>
+
+        <div id="blacklist_examples">
+            <h5>Examples</h5>
+
+            <p>Assume that you have the <b>BinaryTree</b> class as given in the <a href="#ordering_examples">ordering examples</a>. The value of the tree is usually not drawn as a node, but rather displayed inside the tree node, as we have done already in the <a href="#format_examples">string format examples</a>. The following blacklist rule takes care of that:</p>
+
+            <pre>{<br>    "query": "binary/BinaryTree&lt;T&gt;",<br>    "quantifier": "all",<br>    "comparison": "value"<br>}</pre>
+
+            <p>In some cases, the value might actually contain important information, for example if it is not a primitive. To blacklist it only when it is a primitive value, use the following rule:</p>
+
+            <pre>{<br>    "query": "binary/BinaryTree&lt;T&gt;",<br>    "quantifier": "all",<br>    "comparison": "value==primitive"<br>}</pre>
+
+            <p>When debugging a Java main method, there is always a <b>String[] args</b> variable. In many cases, this is not needed. To blacklist that variable, the following rule can be used. The comparison here is optional. If set, the variable is only blacklisted if it contains a primitive value. If no comparison is given, then the variable is always blacklisted.</p>
+
+            <pre>{<br>    "query": "args",<br>    "quantifier": "all",<br>    &lt;optional&gt;("comparison": "this==primitive")<br>}</pre>
+
+        </div>
+    </div>
+
+    <div id="dsl_experts">
+        <h4>For Experts</h4>
+
+        <p>The above examples and descriptions are informal and meant for new users. They cover the most important cases but don't precisely explain the semantics or syntax behind the different options. For a formal description of the semantics and syntax, curious users may take a look at the domain-specific language document: <a href="formal/dsl.pdf">dsl.pdf</a></p>
+    </div>
+
+    <div id="beta">
+        <h3>Beta features</h3>
+
+        <p>Beta features are still in development and can not be considered stable. There are no guarantees for their further development. Therefore, using beta features requires some small additional setup. In the <a href="#configuration">configuration</a>, set the <b>isBeta</b> flag to <b>true</b> and restart Eclipse. Afterwards, beta features will be activated.</p>
+
+        <div id="bug_fixer">
+            <h4>BugFixer</h4>
+
+            <p>Using the BugFixer prototype, the tool can automatically fix a limited set of bugs in your code. To activate it, select the <a href="#fix_bugs_action">fix bugs</a> action. You may either start the prototype before debugging anything, or already debug a program, <a href="#model_editor">correct</a> the graph manually, and then invoke the BugFixer. Once invoked, the following steps will need to be performed:
+            <div id="initialization">
+                <h5>Initialization</h5>
+
+                <ol>
+                    <li>
+                        <b>Select project</b>: Select the project within which the classes are contained which need to be fixed. The project must be opened in Eclipse.
+                    </li>
+                    <li>
+                        <b>Select classes</b>: Select the classes which contain the code you want to have fixed. Note: You must select all classes which are used. For example, if you want to fix a bug in some class <b>package1.Class1</b> and that file imports a class <b>package2.Class2</b>, then you must also select the second class. If it uses (but doesn't import as they are in the same package) a class <b>package1.Class3</b>, you must also select this third class.
+                    </li>
+                    <li>
+                        <b>Select methods</b>: Select the methods which you think might potentially be buggy. All the methods from the previously selected classes are visible here. Generally, the less methods you pick, the faster your bug will be found. Therefore, try to select as few methods as possible here. The methods which are not selected here will not be analyzed.
+                    </li>
+                    <li>
+                        <b>Select main method</b>: Select the main method, which is the entry point to your program. As such, a main method must satisfy certain criteria. These criteria are checked before populating the selection, therefore any method which may be selected here satisfies them:
+                        <ul>
+                            <li>
+                                The method must be <b>public</b>.
+                            </li>
+                            <li>
+                                The method must be <b>static</b>, or be located in a class with a <b>public</b> and <b>empty</b> constructor.
+                            </li>
+                            <li>
+                                The method must have a single argument, and that argument must be an <b>array</b>. Currently supported element types for the array are <b>Integer</b>, <b>int</b> and <b>String</b>, however this may change in future releases.
+                            </li>
+                            <li>
+                                The method must return a value.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>Select rewrite rules</b>: In the last step, you must select the rewrite rules with which the BugFixer attempts to fix your bugs. Instead of directly choosing the rules, you may also choose a bug description, if one applies to your problem. Currently the following rewrite rules are available:
+                        <ul>
+                            <li>
+                                <b>Method and loop counters</b>: Always select this. This avoids the program running into infinite loops, which may be introduced by rewriting.
+                            </li>
+                            <li>
+                                <b>Rewrite loop-exit conditions</b>: If the tool finds a <b>for</b>-loop with an exit condition using the <b>&lt;=</b> operator, it attempts to replace it with a <b>&lt;</b> operator.
+                            </li>
+                            <li>
+                                <b>Change loop-initialization</b>: If the tool finds a <b>for</b>-loop where a variable is initialized to <b>0</b> or <b>1</b>, then it also uses the other value. Note that one limitation exists: The variable must be declared outside of the loop:
+                                <table>
+                                    <tr>
+                                        <th><pre>int i;<br>for (i = 0; ...)</pre></th>
+                                        <th>&nbsp;&nbsp;&nbsp;will be changed</th>
+                                    </tr>
+                                    <tr>
+                                        <th><pre>for (int i = 0; ...)</pre></th>
+                                        <th>&nbsp;&nbsp;&nbsp;will not be changed</th>
+                                    </tr>
+                                </table>
+                            </li>
+                            <li>
+                                <b>Add assignments</b>: Adds assignments of the form <b>a.field = b</b> to the code. Adding these assignments has the goal of fixing bugs such as forgetting to assign the value of the <b>next</b>-pointer in a linked list or not setting one of the children in a binary tree. These assignments will only be added under the condition that the declared type of <b>A.field</b> matches the declared type of <b>a</b>. This corresponds to the following code:
+                                <br>
+                                <pre>class A {<br>    A field;<br>    ...<br>}<br>A a = ...<br>A b = ...<br>a.field = b;</pre>
+                            </li>
+                            <li>
+                                <b>Switch field accesses</b>: Switches between different field accesses, such as replacing <b>a.left</b> with <b>a.right</b>. Switching between these field accesses has the goal of fixing bugs such as following the wrong subtree or setting values in the wrong subtree in tree structures. The BugFixer switches only between fields of the same declared type. This corresponds to the following code (although <b>left</b> and <b>right</b> could also be fields of another type, as long as they are of the same type):
+                                <br>
+                                <pre>class A {<br>    A left;<br>    A right;<br>    ...<br>}<br>A a = ...<br>a.left = ...<br>a.right = ...<br></pre>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div id="fixing_bugs">
+                <h5>Fixing Bugs</h5>
+                <p>Once correctly <a href="#initialization">initialized</a>, the BugFixer prototype can start working on fixing your bugs. The work-flow is as follows:
+                <ol>
+                    <li>
+                        <b>Input</b>: A new input is given to the system. There are multiple ways to get such an input. It can be given by the user, read from a file or be derived randomly.
+                    </li>
+                    <li>
+                        <b>Execute</b>: The different possible versions are executed, to see whether they fix the bugs. Versions which cause errors are immediately discarded, for other versions the next step follows.
+                    </li>
+                    <li>
+                        <b>Evaluate</b>: The user must evaluate the different versions as to whether they fix the bugs. Either a faulty model can be <a href="#model_editor">edited</a>, or yes-no questions may be answered until a correct version appears. If there are more than one version which lead to the correct result, these steps are repeated. If after a certain number of repetitions there is still more than one version, then the one with the least changes to the code is returned.
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="model_editor">
+            <h4>Model Editor</h4>
+
+            <p>As part of the <a href="#bug_fixer">BugFixer</a> prototype, the model editor allows you to edit the graph on screen manually, in order to get a new model with which possibly fixed versions of the code can be compared. The model editor allows many edits to the graph, such that essentially any graph can be created. Note that this only edits the visual structure appearing on screen. It does not make any changes to the underlying heap, meaning that if you continue to the next breakpoint your changes will be lost.</p>
+            <p>The model editor can be invoked in the graph drawer. Right-click on an empty area and select <b>Edit the model</b>. The available actions can be grouped into three sections:</p>
+            <ul>
+                <li>
+                    <b>Dual-node actions</b>: To invoke dual-node actions, press <b>&#8679;</b> and drag one node onto another. The available actions will then be shown in a pop-up menu.
+                </li>
+                <li>
+                    <b>Single-node actions</b>: To invoke single-node actions, <b>right-click</b> any node. The available actions will then be shown in a pop-up menu.
+                </li>
+                <li>
+                    <b>No-node actions</b>: To invoke no-node actions, <b>right-click</b> any empty space. The available actions will then be shown in a pop-up menu.
+                </li>
+            </ul>
+            <p>The following dual-node actions are available:</p>
+            <ul>
+                <li>
+                    <b>Move subtree</b>: Allows to move one subtree to another node. A new name must be given to the new subtree, which may overwrite existing subtrees of the node. Applicable only if the two values are not directly related.
+                </li>
+                <li>
+                    <b>Move partial subtree</b>: Similar to move subtree, however not all children of the subtree root are moved. The children to move with the subtree must be manually selected.
+                </li>
+                <li>
+                    <b>Insert copy</b>: Inserts a copy of one value in another. Fields of the value are however not copied with it. A new name must be given of the field from the value to the copy. Applicable to any two values.
+                </li>
+                <li>
+                    <b>Swap fields</b>: Allows to swap two fields. Applicable only if the two values are siblings. The two fields to swap must come from the same parent. Additionally, the user can choose whether to swap these fields only for the selected nodes or for all nodes of that type.
+                </li>
+                <li>
+                    <b>Swap values</b>: Swaps the values stored in two nodes. The first value will afterwards store the value of the second and vice versa. Applicable to any two values.
+                </li>
+            </ul>
+            <p>The following single-node actions are available:</p>
+            <ul>
+                <li>
+                    <b>Remove value</b>: Completely removes a value. Removes it as a field from all parents, and removes all of its fields. Its fields will however stay in the graph if they are reachable on another path. If a variable points to the value, the variable is also removed. Applicable to any value.
+                </li>
+                <li>
+                    <b>Remove from parent</b>: Removes the value as a field of a parent. If the value is reachable on another path, it stays in the graph. Applicable to any value with at least one parent value.
+                </li>
+                <li>
+                    <b>Insert new value</b>: Allows the creation of a new value, which is then inserted as a field of this value. The name of the field must also be given. The new name may overwrite existing names, in which case one may give a new name to link the new value to the existing field. Applicable to any value or variable.
+                </li>
+                <li>
+                    <b>Rename field</b>: Allows to select any field of the value and rename it. The new name may overwrite an existing name. Applicable to any value with at least one field.
+                </li>
+                <li>
+                    <b>Rename variable</b>: Allows to rename a variable. Applicable to any variable.
+                </li>
+            </ul>
+            <p>The following no-node actions is available:</p>
+            <ul>
+                <li>
+                    <b>Insert null values</b>: A utility action which allows to insert multiple null values at once. The values and variables where to insert null as well as the field names must be given.
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+</body>
+
+
+</html>

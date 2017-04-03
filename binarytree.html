@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Lato|Cabin+Sketch" rel="stylesheet">
+    <title>Binary Tree</title>
+
+    <script src="js/jquery-2.2.4.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <script src="js/functions.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+</head>
+<body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
+
+
+    <button id="to-top" class="btn btn-primary" onclick="moveTo(0);">Go to top</button>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="edviz" class="navbar-brand" href="#">EDViz</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="collapse" style="clear:none;">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="faq.html">FAQ</a>
+                </li>
+                <li>
+                    <a href="manual_en.html">Manual</a>
+                </li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tutorials<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="active"><a href="#">Binary Tree</a></li>
+                        <li><a href="arraylist.html">Array List</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <a href="download.html" class="btn btn-success">Download</a>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="documentation.html">Documentation</a>
+                </li>
+                <li>
+                    <a href="changelog.html">Changelog</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html">About us</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">License</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div>
+
+    <h2 id="title">Binary Tree</h2>
+
+    <!-- Floating content which is usually hidden -->
+    <div class="floating-content">
+        <div class="content-table"></div>
+    </div>
+    <button class="btn btn-default show-content" style="margin-bottom: 10px;" onclick="toggleFloatingContent()">Content</button>
+
+
+    <div class="content">
+        <h3>Content</h3>
+        <div class="content-table"></div>
+
+    </div>
+
+    <div class="main">
+
+        <div class="alert alert-info" role="alert">
+            Check out the video version of this tutorial below!
+        </div>
+        <iframe width="100%" style="max-width: 560px;" height="315" src="https://www.youtube.com/embed/Xudm8rAB-Ck" frameborder="0" allowfullscreen></iframe>
+
+        <div id="introduction">
+            <h3>Introduction</h3>
+            <p>This tutorial will guide you through developing a very simple binary tree with the tool and show you the necessary steps to configure the tool as desired. Look at the manual to get a more general introduction to the tool, or for specific questions. If you haven't installed the tool yet, take a look at the <a href="manual_en.html#installation">installation</a> description. If you don't know how to open the tool, find out how to <a href="manual_en.html#usage">use it</a>, and then come back to this tutorial.</p>
+        </div>
+
+        <div id="code">
+            <h3>Code</h3>
+            <p>We will be developing a very simple binary tree class. This class will support the <b>insert</b> feature, but not <b>remove</b> or <b>find</b>. This tutorial doesn't aim to show you how to develop a binary tree, but how to use the tool.</p>
+            <p>Create a class <b>BinaryTree</b> in a package <b>binarytree</b> with the following code:
+            <pre>
+package binarytree;
+
+class BinaryTree&lt;T extends Comparable&lt;T&gt;&gt; {
+    T myValue;
+    BinaryTree&lt;T&gt; left, right;
+
+    BinaryTree(T value) {
+        this.myValue = value;
+    }
+
+    void insert(T value) {
+        if (value.compareTo(myValue) <= 0) {
+            if (left == null) {
+                left = new BinaryTree&lt;&gt;(value);
+            } else {
+                left.insert(value);
+            }
+        } else {
+            if (right == null) {
+                right = new BinaryTree&lt;&gt;(value);
+            } else {
+                right.insert(value);
+            }
+        }
+    }
+}</pre>
+            <p>Additionally, create a <b>Main</b> class in the same package with the following code:</p>
+            <pre>
+package binarytree;
+
+class Main {
+
+    public static void main(String[] args) {
+        BinaryTree&lt;Integer&gt; tree = new BinaryTree<>(5);
+        tree.insert(5);
+        tree.insert(3);
+        tree.insert(2);
+        tree.insert(4);
+        tree.insert(7);
+        tree.insert(6);
+        tree.insert(8);
+        System.out.println(tree);
+    }
+}</pre>
+            <p>We now have the code to debug. Add a breakpoint to the last line in the <b>Main.main</b> method. That way, the entire tree will be shown in the tool. For this tutorial, this is sufficient. Otherwise, of course breakpoints are supported at any place in the code.</p>
+        </div>
+
+        <div id="debugging">
+            <h3>Debugging</h3>
+
+            <p>Let's now debug the program. Before adding any configuration, the tool will show a graph which looks similar in style to the one below:</p>
+            <img src="images/binarytree_initial.JPG"/>
+            <p>One can see multiple issues with this graph. For one, the <b>left</b> and <b>right</b> fields are not ordered as desired. Secondly, the text contained in the tree nodes is not very informative. Lastly, the tree doesn't look very tree-like: We would like not to see the <b>myValue</b> field in the graph. Let's take care of these issues step-by-step.</p>
+
+            <div id="ordering">
+                <h4>Field order</h4>
+
+                <p>First, let's take care of making sure the <b>left</b> and <b>right</b> fields appear in the correct order in the graph. For this, we need to add an ordering constraint. Refer to the <a href="manual_en.html#ordering_constraints">manual</a> on how to add a constraint. Add the following constraint:</p>
+                <pre>{<br>    "query": "binarytree/BinaryTree&lt;T&gt;",<br>    "quantifier": "all",<br>    "order": "(left.recurse(*))&lt;(right.recurse(*))"<br>}</pre>
+                <p>After applying this constraint, the order of the fields is correct and the graph looks like below. We can see that now all <b>left</b> subtrees are drawn to the left of a <b>right</b> subtree. With the <b>left.recurse(*)&lt;right.recurse(*)</b> order, we ensure that the entire left subtree is always drawn to the left of the entire right subtree of a node. Refer to the <a href="manual_en.html#ordering_constraints">manual</a> for more details.</p>
+                <img src="images/binarytree_ordered.JPG"/>
+            </div>
+
+            <div id="value_strings">
+                <h4>Value strings</h4>
+
+                <p>Secondly, let's make sure the tree looks a bit informative. For this, we add a value string format. We want to make sure that a <b>BinaryTree</b> instance with a field <b>myValue=5</b> is displayed in the graph as follows: <b>5</b>. Refer to the <a href="manual_en.html#string_formats">manual</a> on how to add a value string format. Add the following format:</p>
+                <pre>{<br>    "query": "binarytree/BinaryTree&lt;T&gt;",<br>    "quantifier": "all",<br>    "format": "{myValue}"<br>}</pre>
+                <p>After applying the format, the information contained in the nodes looks like below. We can now clearly see the meaning of each node, and understanding the correct order of the tree becomes easier. The field names are hidden out of convenience, as they are not important for these steps anymore. They can always be shown again using the checkbox or by hovering above a value.</p>
+                <img src="images/binarytree_format.JPG"/>
+            </div>
+
+            <div id="blacklist">
+                <h4>Blacklisting</h4>
+
+                <p>Lastly, we want to remove the <b>myValue</b> field and the <b>args</b> variable from the graph. As we have the value of the <b>myValue</b> field visible directly in the nodes, it contains no additional information and only takes up screen space. It also makes the graph look less tree-like. Therefore, we add a blacklist rule. Refer to the <a href="manual_en.html#blacklist">manual</a> on how to add a blacklist rule. Then add the following rule:</p>
+                <pre>{<br>    "query": "binarytree/BinaryTree&lt;T&gt;",<br>    "quantifier": "all",<br>    "comparison": "myValue==primitive"<br>}</pre>
+                <p>The above rule removes the <b>myValue</b> field from the graph. However, it does so only when it is a primitive value. Whenever it is not a primitive type, it is still going to be shown. This is useful, as non-primitive types typically have fields and therefore contain more information than can be shown in a string only. As we can see in the image below, the graph now looks as we would imagine a binary tree to look.</p>
+                <img src="images/binarytree_no_field.JPG"/>
+                <p>To remove the <b>args</b> variable from the graph, we need to add one more blacklist rule. Add the following rule:</p>
+                <pre>{<br>    "query": "args",<br>    "quantifier": "all",<br>    "comparison": "this"<br>}</pre>
+                <p><b>args</b> as the query allows us to refer to the variable (and its value). By using <b>this</b> as the comparison, we refer to the results from the query and blacklist them. Finally, the graph looks as in the image below, without any visual clutter.</p>
+                <img src="images/binarytree_final.JPG">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+</body>
+
+</html>

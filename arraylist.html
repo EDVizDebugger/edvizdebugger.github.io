@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Lato|Cabin+Sketch" rel="stylesheet">
+    <title>Array List</title>
+
+    <script src="js/jquery-2.2.4.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <script src="js/functions.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+</head>
+<body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
+
+
+<button id="to-top" class="btn btn-primary" onclick="moveTo(0);">Go to top</button>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="edviz" class="navbar-brand" href="#">EDViz</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="collapse" style="clear:none;">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="faq.html">FAQ</a>
+                </li>
+                <li>
+                    <a href="manual_en.html">Manual</a>
+                </li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tutorials<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="binarytree.html">Binary Tree</a></li>
+                        <li class="active"><a href="#">Array List</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <a href="download.html" class="btn btn-success">Download</a>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="documentation.html">Documentation</a>
+                </li>
+                <li>
+                    <a href="changelog.html">Changelog</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html">About us</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">License</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div>
+
+    <h2 id="title">Array List</h2>
+
+    <!-- Floating content which is usually hidden -->
+    <div class="floating-content">
+        <div class="content-table"></div>
+    </div>
+    <button class="btn btn-default show-content" style="margin-bottom: 10px;" onclick="toggleFloatingContent()">Content</button>
+
+
+    <div class="content">
+        <h3>Content</h3>
+        <div class="content-table"></div>
+
+    </div>
+
+    <div class="main">
+
+        <div class="alert alert-info" role="alert">
+            Check out the video version of this tutorial below!
+        </div>
+        <iframe width="100%" style="max-width: 560px;" height="315" src="https://www.youtube.com/embed/pY8UJApy834" frameborder="0" allowfullscreen></iframe>
+
+        <div id="introduction">
+            <h3>Introduction</h3>
+            <p>This tutorial will guide you through developing a very simple array list with the tool and show you the necessary steps to configure the tool as desired. Look at the manual to get a more general introduction to the tool, or for specific questions. If you haven't installed the tool yet, take a look at the <a href="manual_en.html#installation">installation</a> description. If you don't know how to open the tool, find out how to <a href="manual_en.html#usage">use it</a>, and then come back to this tutorial.</p>
+        </div>
+
+        <div id="code">
+            <h3>Code</h3>
+
+            <p>We will be developing a very simple array list class. This class will only support the <b>add</b> feature, adding a new element to the end of the list. This tutorial doesn't aim to teach you about developing an array list, but how to use the tool.</p>
+
+            <p>Create a class <b>ArrayList</b> in a package <b>arraylist</b> with the following code:</p>
+
+            <pre>
+package arraylist;
+
+import java.util.Arrays;
+
+class ArrayList&lt;T&gt; {
+    T[] elements;
+    int nextIndex = 0;
+
+    ArrayList() {
+        this.elements = (T[]) new Object[10];
+    }
+
+    void add(T t) {
+        if (nextIndex >= elements.length) {
+            this.elements = Arrays.copyOf(elements, elements.length * 2);
+        }
+        elements[nextIndex++] = t;
+    }
+}</pre>
+            <p>Additionally, create a <b>Main</b> class in the same package with the following code:</p>
+
+            <pre>
+package arraylist;
+
+public class Main {
+
+    public static void main(String[] args) {
+        ArrayList&lt;Integer&gt; arrayList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            arrayList.add(i);
+        }
+        System.out.println(arrayList);
+    }
+} </pre>
+
+            <p>We now have the code to debug. Add a breakpoint to the last line in the <b>Main.main</b> method. That way, the entire list will be shown in the tool. For this tutorial, this is sufficient. Otherwise, of course breakpoints are supported at any place in the code.</p>
+        </div>
+
+        <div id="debugging">
+            <h3>Debugging</h3>
+
+            <p>Let's now debug the program. Before adding any configuration, the tool will show a graph which looks similar in style to the one below:</p>
+
+            <img src="images/arraylist_initial.JPG"/>
+
+            <p>One can see an issue with this graph. The elements of the array are not ordered correctly. Let's take care of this issue.</p>
+
+            <div id="order">
+                <h4>Element order</h4>
+
+                <p>Let's take care of making sure the elements of the array appear in the correct order in the graph. For this, we need to add an ordering constraint. Refer to the <a href="manual_en.html#ordering_constraints">manual</a> on how to add a constraint. Add the following constraint:</p>
+
+                <pre>{<br>    "query": "arraylist.ArrayList&lt;T&gt;.elements.i",<br>    "quantifier": "all",<br>   "order": "(i)&lt;(i+1)"<br>}</pre>
+
+                <p>After applying this constraint, the order of the elements is correct and the graph looks like below. Adding the query <b>ArrayList&lt;T&gt;.elements.i</b> allows us to refer to each array element, while being able to refer to it in the <b>order</b> as well. <b>i&lt;i+1</b> then makes sure that the i-th element is ordered to the left of the (i+1)-st element. Refer to the <a href="manual_en.html#ordering_constraints">manual</a> for more details.</p>
+
+                <img src="images/arraylist_final.JPG"/>
+            </div>
+
+            <div id="abstraction">
+                <h4>Abstraction</h4>
+
+                <p>In the graph, there is a node <b>Multiple</b>. This node abstracts multiple nodes which are otherwise null. Right-click that node to remove the abstraction and see the underlying nodes. You may also right-click to get more information on the nodes which are abstracted. These null nodes are abstracted due to the following abstraction rule, which is by default part of the system (but may be removed in the configuration):</p>
+
+                <pre>{<br>    "query": "*",<br>    "quantifier": "all",<br>    "comparison": "*==null",<br>    "count": 4,<br>    "active": true<br>}</pre>
+
+                <p>The above rule makes sure that for any node (query <b>"*"</b>) with more than 4 null fields (comparison <b>"*==null</b> and count <b>4</b>), these fields are abstracted to a single node. See the <a href="manual_en.html#abstractions">manual</a> for details on how to deactivate this rule. Deactivating the rule then makes the array list appear as below, without any abstraction.</p>
+
+                <img src="images/arraylist_no_abstraction.JPG"/>
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+</body>
+
+</html>

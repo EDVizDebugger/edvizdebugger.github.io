@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Lato|Cabin+Sketch" rel="stylesheet">
+    <title>Documentation</title>
+
+    <script src="js/jquery-2.2.4.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <script src="js/functions.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+</head>
+<body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
+
+<button id="to-top" class="btn btn-primary" onclick="moveTo(0);">Go to top</button>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="edviz" class="navbar-brand" href="#">EDViz</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="collapse" style="clear:none;">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="faq.html">FAQ</a>
+                </li>
+                <li>
+                    <a href="manual_en.html">Manual</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tutorials<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="binarytree.html">Binary Tree</a></li>
+                        <li><a href="arraylist.html">Array List</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <a href="download.html" class="btn btn-success">Download</a>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active">
+                    <a href="#">Documentation</a>
+                </li>
+                <li>
+                    <a href="changelog.html">Changelog</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html">About us</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">License</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h2 id="title">Documentation</h2>
+
+<!-- Floating content which is usually hidden -->
+<div class="floating-content">
+    <div class="content-table"></div>
+</div>
+<button class="btn btn-default show-content" style="margin-bottom: 10px;" onclick="toggleFloatingContent()">Content</button>
+
+
+<div class="content">
+    <h3>Content</h3>
+    <div class="content-table"></div>
+</div>
+
+<div class="main" style="margin-bottom: 50px;">
+    <div id="overview">
+        <h3>Overview</h3>
+
+        <p>The picture below shows the different modules which make up the entire tool. The <b>EDViz</b> module can only be developed using Eclipse, as it is an Eclipse plug-in. All other modules are independent of the IDE they are developed in. Splitting the system up into these modules aims to create multiple reusable and self-contained parts.</p>
+
+        <img src="images/architecture.png" width="500px"/>
+
+    </div>
+
+
+    <div id="modules">
+        <h3>Modules</h3>
+
+        <div id="utility">
+            <h4>Utility</h4>
+
+            <p>The Utility module contains utility code which is used in many parts of the system. All packages in the module start with <b>org.eth.cyril.util</b>. Most importantly it contains any <a href="javadoc/modeltograph/org/eth/cyril/util/configuration/package-summary.html">configuration</a> code. The configuration is used everywhere in the system to configure the look and the behavior of the system. You probably don't need to do any development within this module, but will find parts of it quite useful</p>
+        </div>
+
+        <div id="graph_drawing">
+            <h4>Graph Drawing</h4>
+
+            <p>The GraphDrawing module contains any code which concerns the graph drawing code. All packages in the module start with <b>org.eth.cyril.graphdrawing</b>. The <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/graph/package-summary.html">graph</a> package is the most important package here. The <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/graph/edge/package-summary.html">edge</a> package contains any code which has to do with standard edges. The easiest way to create graphs is to use one of the builders given in the <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/graph/builder/GraphBuilder.html">GraphBuilder</a> interface. This interface allows building graphs from the objects to be contained in their nodes, instead of having to work with nodes and edges directly.</p>
+
+            <p>The cached builder will cache the object-to-node mapping over multiple graphs, and therefore reuse nodes when objects appear again. This is useful to keep using the same nodes. The basic builder will not cache this mapping, but clear everything when a new graph is started. The following example code shows the usual way to create a graph: </p>
+
+            <pre>
+GraphBuilder builder = ...
+
+//Must always start a new graph first.
+builder.startNewGraph();
+
+//First, add the nodes.
+builder.buildNode(o1);
+builder.buildNode(o2);
+
+//Then, build the edges. Edges with a non-existing node are silently ignored.
+builder.buildEdge(o1, o2);
+builder.buildEdge(o1, o3); //Ignored!
+
+//Finally, build the graph. Before building the next graph, make sure to reset again.
+Graph g = builder.buildGraph();</pre>
+
+            <p>The <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/graph/algorithms/package-summary.html">algorithms</a> package contains various graph-based algorithms. Finally, the <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/graph/drawing/package-summary.html">drawing</a> package contains all graph layout code. To add a new graph layout algorithm, extend the <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/graph/drawing/GraphDrawingAlgorithm.html">GraphDrawingAlgorithm</a> class and implement the missing abstract method. Each graph layout algorithm comes with its own <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/graph/drawing/configuration/EmptyConfiguration.html">configuration</a> object. </p>
+
+            <p>The standard graph layout algorithm used in the system is the <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/graph/drawing/sugiyama/constrained/ConstrainedSugiyamaLayoutAlgorithm.html">ConstrainedSugiyamaLayoutAlgorithm</a>. It uses the <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/graph/drawing/sugiyama/constrained/constraints/order/CycleRemovingOrderingDecider.html">CycleRemovingOrderingDecider</a> to order the nodes in each level, and the <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/graph/drawing/sugiyama/constrained/constraints/position/quadraticprogramming/QuadraticProgrammingXPositionCalculator.html">QuadraticProgrammingXPositionCalculator</a> to calculate the x-position of all its nodes.</p>
+
+            <p>Laying out a graph is then quite simple. The following example code shows the usual way to use a graph layout algorithm:</p>
+            <pre>
+Graph graph = ...
+
+GraphDrawingAlgorithm&lt;?&gt; algorithm = ...
+
+//Get the configuration and update it
+EmptyConfiguration config = algorithm.defaultConfiguration();
+modifyConfiguration(config);
+
+//Draw the graph
+DrawingFrame frame = new DrawingFrame(500.0, 500.0);
+frame = algorithm.determinePositions(graph, frame, config);
+
+//The graph's nodes now contain the updated positions
+for (Node node: graph.getNodes()) {
+    System.out.println(node.getPosition());
+}</pre>
+
+            <p>Another important package is the <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/gui/graphdrawer/package-summary.html">graphdrawer</a> package. The <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/gui/graphdrawer/GraphDrawer.html">GraphDrawer</a> interface contains the functionality implemented by every graph drawing area. This allows to have a consistent interface for mouse listeners to attach to, while still having different graph drawing areas based on a browser, SWT or Swing. The mouse events and the listener interfaces to be implemented can be found in the package <a href="javadoc/modeltograph/org/eth/cyril/graphdrawing/gui/graphdrawer/events/package-summary.html">events</a> package. These listeners can then be added to any graph drawer instance.</p>
+        </div>
+
+        <div id="model">
+            <h4>Model</h4>
+
+            <p>The Model module contains any code which concerns the model. All packages in the module start with <b>org.eth.cyril.model</b>. The <a href="javadoc/modeltograph/org/eth/cyril/model/model/package-summary.html">model</a> package contains the main model code. The <a href="javadoc/modeltograph/org/eth/cyril/model/model/HeapContent.html">HeapContent</a> models the heap, containing all variables and reachable values. It also contains the blacklist, which hides some nodes in the final graph. The different possible types of values and variables are located in the package <a href="javadoc/modeltograph/org/eth/cyril/model/model/nodes/package-summary.html">nodes</a> package. These are not directly instantiable. To create instances of these objects, use the factory given in the <a href="javadoc/modeltograph/org/eth/cyril/model/model/ModelFactories.html">ModelFactories</a> class. You may also supply your own factory here, to use your own implementations globally within the project. All values and variables are created with this factory.</p>
+
+            <p>The following example code shows how the model objects are typically created, and how a heap content instance may be initialized:</p>
+            <pre>
+ModelFactory factory = ModelFactory.getFactory();
+
+//Don't forget to set the value string!
+ObjectValue ov = factory.objectValue(0, "MyType");
+ov.setValueString("Hello");
+
+PrimitiveValue pv = factory.primitiveValue(1, "int");
+pv.setValueString("1");
+
+NullValue nv = factory.nullValue(2);
+nv.setValueString("null");
+
+//Can only set the fields after creating the ObjectValue.
+//Always set fields and parents!
+ov.addField("f1", pv);
+pv.addParent("f1", ov);
+ov.addField("f2", nv);
+nv.addParent("f2", ov);
+
+//A variable has a value, which must be set.
+Variable var = factory.variable("var", "MyType");
+var.setValue(ov);
+
+//Reachable values are automatically found.
+HeapContent heap = new HeapContent(Collections.singletonList(var), true, "main");;</pre>
+
+            <p>The <a href="javadoc/modeltograph/org/eth/cyril/model/constraintlanguage/package-summary.html">constraint language</a> and <a href="javadoc/modeltograph/org/eth/cyril/model/dsl/package-summary.html">dsl</a> packages contains code concerning the domain-specific language for specifying ordering constraints, string formats, blacklist rules and abstraction rules. Within the dsl package, there is a <b>DSL.g4</b> file which contains the <a href="http://www.antlr.org/">ANTLR</a> grammar for the different parts of the domain-specific language. The <a href="javadoc/modeltograph/org/eth/cyril/model/dsl/QueryResolver.html">QueryResolver</a> handles entire queries of the form <b>a.b.c</b> with multiple parts. A <a href="javadoc/modeltograph/org/eth/cyril/model/constraintlanguage/Resolver.html">Resolver</a> instance then handles a single term of the form <b>a</b> out of <b>a.b.c</b>. All value types, the variable type and heap content in the model implement this interface to allow applying the domain-specific language to them. A <a href="javadoc/modeltograph/org/eth/cyril/model/dsl/ComparisonResolver.html">ComparisonResolver</a> matches the comparison term as seen in blacklist or abstraction rules, with multiple comparisons separated by a comma. The <a href="javadoc/modeltograph/org/eth/cyril/model/constraintlanguage/MatchingResolver.html">MatchingResover</a> is used for such comparisons, by allowing to compare to a string. All value types in the model also implement this to compare to their value string. The <a href="javadoc/modeltograph/org/eth/cyril/model/blacklist/package-summary.html">blacklist</a> package contains all of the code which handles blacklisting.</p>
+
+            <p>The <a href="javadoc/modeltograph/org/eth/cyril/model/abstraction/package-summary.html">abstraction</a> package contains functionality concerning abstraction. The <a href="javadoc/modeltograph/org/eth/cyril/model/abstraction/QueryAbstractionHandler.html">QueryAbstractionHandler</a> handles abstraction by queries as specified in the configuration. To handle abstraction, use an <a href="javadoc/modeltograph/org/eth/cyril/model/abstraction/AbstractionManager.html">AbstractionManager</a> instance. Such an instance is for example available in the <a href="javadoc/modeltograph/org/eth/cyril/modeltograph/DrawingStepHandler.html">DrawingStepHandler</a>. </p>
+
+            <p>The <a href="javadoc/modeltograph/org/eth/cyril/model/output/package-summary.html">output</a> package then contains functionality concerning the value strings for the values. The main function to use for that is the <a href="javadoc/modeltograph/org/eth/cyril/model/model/ValueStringResolverManager.html">ValueStringResolverManager's</a> <b>apply</b> method. Such an instance is for example available in the <a href="javadoc/modeltograph/org/eth/cyril/modeltograph/DrawingStepHandler.html">DrawingStepHandler</a>. </p>
+
+            <p>The following code shows how to typically apply abstraction and string resolving in order. Note that the order is important, such that the value strings of abstracted values can be set correctly.</p>
+
+            <pre>
+AbstractionManager&lt;Value&gt; aManager = ...
+ValueStringResolverManager sManager = ...
+HeapContent heap = ...
+
+//Apply abstraction first
+aManager.handleAbstraction(heap, heap);
+
+//Apply value string
+sManager.apply(heap); </pre>
+
+        </div>
+
+        <div id="modeltograph">
+            <h4>ModelToGraph</h4>
+
+            <p>The ModelToGraph contains code which connects the Model and the GraphDrawing modules together. All packages in the module start with <b>org.eth.cyril.modeltograph</b>. The <a href="javadoc/modeltograph/org/eth/cyril/modeltograph/constraints/package-summary.html">constraints</a> package contains the constraints which are available for the graph layout algorithm. Of specific interest is the <a href="javadoc/modeltograph/org/eth/cyril/modeltograph/constraints/ConstraintResolver.html">ConstraintResolver</a> class, which resolves the ordering constraints from the configuration to actual constraints usable in the layout algorithm.</p>
+
+            <p>The <a href="javadoc/modeltograph/org/eth/cyril/modeltograph/GraphCreator.html">GraphCreator</a> class handles conversion of the heap content to graphs, where the blacklisted values and variables are not part of the graph. The <a href="javadoc/modeltograph/org/eth/cyril/modeltograph/DrawingStepHandler.html">DrawingStepHandler</a> handles all steps in the life cycle of a heap content/graph instance, including abstraction, setting value strings and layout. Listeners can register to receive updates and therefore be notified whenever a new graph is laid out.</p>
+
+            <p>By default, the DrawingStepHandler updates the value string resolver, blacklist manager, abstraction manager and layout algorithm constraints based on values from the configuration. In order to change how these are set, the <a href="javadoc/modeltograph/org/eth/cyril/modeltograph/DSLUpdater.html">DSLUpdater</a> can be implemented, and the <a href="javadoc/modeltograph/org/eth/cyril/modeltograph/DrawingStepHandler.html#setUpdater-org.eth.cyril.modeltograph.DSLUpdater-">DrawingStepHandler#setUpdater</a> method may be used. The default updater is the DrawingStepHandler instance itself.</p>
+        </div>
+
+        <div id="debugbackend">
+            <h4>EDViz</h4>
+
+            <p>EDViz contains all Eclipse and Java-specific code, such as the heap analysis code when hitting breakpoints. It also contains various SWT-based GUI components, such as the main graph drawing area. The <a href="javadoc/plugin/debugbackend/Activator.html">Activator</a> class is used to start and stop the plug-in. The <a href="javadoc/plugin/debugbackend/views/DebugBackendView.html">DebugBackendView</a> starts up and initializes the entire view, including adding all the actions from the <a href="javadoc/plugin/debugbackend/views/actions/package-summary.html">actions</a> package to the view and initializing the graph drawer (which by default is a <a href="javadoc/plugin/org/eth/cyril/gui/swt/BrowserGraphDrawer.html">BrowserGraphDrawer</a> instance. The <a href="javadoc/plugin/debugbackend/views/DebugEventSetListener.html">DebugEventSetListener</a> integrates with Eclipse and is notified about any debug events (such as breakpoints being hit).</p>
+
+            <p>All <a href="javadoc/plugin/org/eth/cyril/bugfixer/package-summary.html">bugfixer</a> packages and classes are part of the beta features and contain the automatic code correction tool. The <a href="javadoc/plugin/org/eth/cyril/gui/swt/package-summary.html">SWT</a> package contains various SWT-based GUI components and utilities. The <a href="javadoc/plugin/org/eth/cyril/interactive/package-summary.html">interactive</a> package contains code for the interactive mode. The mouse listeners for the graph drawer are located in the <a href="javadoc/plugin/org/eth/cyril/listeners/package-summary.html">listeners</a> package. Finally, heap analysis is performed by the classes in the <a href="javadoc/plugin/org/eth/jibin/visualization/contentprovider/package-summary.html">contentprovider</a> package, such as the <a href="javadoc/plugin/org/eth/jibin/visualization/contentprovider/VisualizationInput.html">VisualizationInput</a> and <a href="javadoc/plugin/org/eth/jibin/visualization/contentprovider/ProgramHeapVisitor.html">ProgramHeapVisitor</a> classes.</p>
+        </div>
+
+    </div>
+
+    <div id="javadov">
+        <h3>JavaDoc</h3>
+
+        <p>Modules Utility, GraphDrawing, Model and ModelToGraph: <a href="javadoc/modeltograph/index.html">Index</a></p>
+        <p>Module EDViz: <a href="javadoc/plugin/index.html">Index</a></p>
+    </div>
+</div>
+
+</body>
+
+</html>

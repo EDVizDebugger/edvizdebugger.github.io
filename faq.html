@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Lato|Lobster|Cabin+Sketch" rel="stylesheet">
+    <title>FAQ</title>
+
+    <script src="js/jquery-2.2.4.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <script src="js/functions.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+</head>
+<body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="edviz" class="navbar-brand" href="#">EDViz</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="collapse" style="clear:none;">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="active">
+                    <a href="#">FAQ</a>
+                </li>
+                <li>
+                    <a href="manual_en.html">Manual</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tutorials<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="binarytree.html">Binary Tree</a></li>
+                        <li><a href="arraylist.html">Array List</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <a href="download.html" class="btn btn-success">Download</a>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="documentation.html">Documentation</a>
+                </li>
+                <li>
+                    <a href="changelog.html">Changelog</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html">About us</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">License</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="index" class="faq">
+
+    <div class="qa">
+        <p class="question">Q: What are the system requirements?</p>
+
+        <p class="answer">A: Eclipse Mars (4.5) or higher. Any operating system should work. Tested on Windows 10 and OS X El Capitan.</p>
+    </div>
+
+    <div class="qa">
+        <p class="question">Q: I fulfill the system requirements, but the tool doesn't work?</p>
+
+        <p class="answer">A: Make sure you followed all <a href="manual_en.html#installation">installation instructions</a>. If it still doesn't work, please write an email to <a href="mailto:csteimer@student.ethz.ch">csteimer@student.ethz.ch</a> and let me know about your operating system and version of Eclipse.</p>
+    </div>
+
+    <div class="qa">
+        <p class="question">Q: What languages is the tool available in?</p>
+
+        <p class="answer">A: The tool is available in German and English at this moment. There is only one download, you can change the language at any time.</p>
+    </div>
+
+    <div class="qa">
+        <p class="question">Q: What is this tool?</p>
+
+        <p class="answer">A: The tool allows you to visually debug your code. It is particularly suited for small data structures. It comes in the form of an Eclipse plug-in containing a single view.</p>
+    </div>
+
+    <div class="qa">
+        <p class="question">Q: What can I use the tool for?</p>
+
+        <p class="answer">A: You can debug relatively small data structures (graps with up to 100-200 nodes) with it. While well-suited to data structures, generally any smaller program can be debugged.</p>
+    </div>
+
+    <div class="qa">
+        <p class="question">Q: What can't I use the tool for?</p>
+
+        <p class="answer">A: You probably won't have any success trying to debug a large, sophisticated program with it. Anything with more than a few 100 nodes will either take very long or completely fail.</p>
+    </div>
+
+    <div class="qa">
+        <p class="question">Q: How do I install it?</p>
+
+        <p class="answer">A: Check out the <a href="manual_en.html#installation">installation</a> section of the manual.</p>
+    </div>
+
+    <div class="qa">
+        <p class="question">Q: How can I debug a program?</p>
+
+        <p class="answer">A: As usual: Set breakpoints and start debugging while the view is open. The view then automatically changes its contents at each breakpoint.</p>
+    </div>
+
+    <div class="qa">
+        <p class="question">Q: How can I report a bug?</p>
+
+        <p class="answer">A: To report a bug, write an email to <a href="mailto:csteimer@student.ethz.ch">csteimer@student.ethz.ch</a>. Explain in detail when the bug occurs. If the bug happens for specific code you are developing, send that code as well. Don't forget to include your configuration file if you made any changes.</p>
+    </div>
+
+    <div class="qa">
+        <p class="question">Q: How can I contribute?</p>
+
+        <p class="answer">A: Right now, the best thing that you can do is to use the tool and give feedback on it. To improve the usability and the features, it's very important to have people developing their own code with it.</p>
+
+    </div>
+</div>
+
+
+</body>
+
+</html>
