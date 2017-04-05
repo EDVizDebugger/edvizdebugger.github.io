@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/EDViz_0.3.1.jar" id="EDViz" version="0.3.1"/>
+</site>
