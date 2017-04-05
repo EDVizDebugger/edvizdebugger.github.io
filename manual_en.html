@@ -226,9 +226,6 @@
             <li>
                 <b>Manual</b>: Opens this manual in a browser window within the tool.
             </li>
-            <li id="fix_bugs_action">
-                <b>Fix bugs</b>: A <a href="#beta">beta</a> feature which can automatically fix certain bugs. If the beta mode is not active, then this action will not be available.
-            </li>
             <li id="load_config">
                 <b>Load configuration</b>: Instead of the default configuration file, you may optionally specify a different configuration file to load. The configuration file may also be reset to use the default configuration file again. This action also shows you the location of the default configuration file if you need to manually edit, as long as no other configuration file is loaded. To finish loading a configuration, reload the view by using the <b>Reload</b> button to reload the view.
             </li>
@@ -267,9 +264,6 @@
             </li>
             <li>
                 <b>height</b>: The height of the drawing area on screen in pixels.
-            </li>
-            <li>
-                <b>isBeta</b>: If set to <b>true</b>, then <a href="#beta">beta</a> features will be activated.
             </li>
             <li id="font">
                 <b>fontInfo</b>: Allows setting various attributes with regard to the font used. The following attributes exist here:
@@ -534,169 +528,8 @@
             <pre>{<br>    "query": "args",<br>    "quantifier": "all",<br>    &lt;optional&gt;("comparison": "this==primitive")<br>}</pre>
 
         </div>
-    </div>
-
-    <div id="dsl_experts">
-        <h4>For Experts</h4>
-
-        <p>The above examples and descriptions are informal and meant for new users. They cover the most important cases but don't precisely explain the semantics or syntax behind the different options. For a formal description of the semantics and syntax, curious users may take a look at the domain-specific language document: <a href="formal/dsl.pdf">dsl.pdf</a></p>
-    </div>
-
-    <div id="beta">
-        <h3>Beta features</h3>
-
-        <p>Beta features are still in development and can not be considered stable. There are no guarantees for their further development. Therefore, using beta features requires some small additional setup. In the <a href="#configuration">configuration</a>, set the <b>isBeta</b> flag to <b>true</b> and restart Eclipse. Afterwards, beta features will be activated.</p>
-
-        <div id="bug_fixer">
-            <h4>BugFixer</h4>
-
-            <p>Using the BugFixer prototype, the tool can automatically fix a limited set of bugs in your code. To activate it, select the <a href="#fix_bugs_action">fix bugs</a> action. You may either start the prototype before debugging anything, or already debug a program, <a href="#model_editor">correct</a> the graph manually, and then invoke the BugFixer. Once invoked, the following steps will need to be performed:
-            <div id="initialization">
-                <h5>Initialization</h5>
-
-                <ol>
-                    <li>
-                        <b>Select project</b>: Select the project within which the classes are contained which need to be fixed. The project must be opened in Eclipse.
-                    </li>
-                    <li>
-                        <b>Select classes</b>: Select the classes which contain the code you want to have fixed. Note: You must select all classes which are used. For example, if you want to fix a bug in some class <b>package1.Class1</b> and that file imports a class <b>package2.Class2</b>, then you must also select the second class. If it uses (but doesn't import as they are in the same package) a class <b>package1.Class3</b>, you must also select this third class.
-                    </li>
-                    <li>
-                        <b>Select methods</b>: Select the methods which you think might potentially be buggy. All the methods from the previously selected classes are visible here. Generally, the less methods you pick, the faster your bug will be found. Therefore, try to select as few methods as possible here. The methods which are not selected here will not be analyzed.
-                    </li>
-                    <li>
-                        <b>Select main method</b>: Select the main method, which is the entry point to your program. As such, a main method must satisfy certain criteria. These criteria are checked before populating the selection, therefore any method which may be selected here satisfies them:
-                        <ul>
-                            <li>
-                                The method must be <b>public</b>.
-                            </li>
-                            <li>
-                                The method must be <b>static</b>, or be located in a class with a <b>public</b> and <b>empty</b> constructor.
-                            </li>
-                            <li>
-                                The method must have a single argument, and that argument must be an <b>array</b>. Currently supported element types for the array are <b>Integer</b>, <b>int</b> and <b>String</b>, however this may change in future releases.
-                            </li>
-                            <li>
-                                The method must return a value.
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <b>Select rewrite rules</b>: In the last step, you must select the rewrite rules with which the BugFixer attempts to fix your bugs. Instead of directly choosing the rules, you may also choose a bug description, if one applies to your problem. Currently the following rewrite rules are available:
-                        <ul>
-                            <li>
-                                <b>Method and loop counters</b>: Always select this. This avoids the program running into infinite loops, which may be introduced by rewriting.
-                            </li>
-                            <li>
-                                <b>Rewrite loop-exit conditions</b>: If the tool finds a <b>for</b>-loop with an exit condition using the <b>&lt;=</b> operator, it attempts to replace it with a <b>&lt;</b> operator.
-                            </li>
-                            <li>
-                                <b>Change loop-initialization</b>: If the tool finds a <b>for</b>-loop where a variable is initialized to <b>0</b> or <b>1</b>, then it also uses the other value. Note that one limitation exists: The variable must be declared outside of the loop:
-                                <table>
-                                    <tr>
-                                        <th><pre>int i;<br>for (i = 0; ...)</pre></th>
-                                        <th>&nbsp;&nbsp;&nbsp;will be changed</th>
-                                    </tr>
-                                    <tr>
-                                        <th><pre>for (int i = 0; ...)</pre></th>
-                                        <th>&nbsp;&nbsp;&nbsp;will not be changed</th>
-                                    </tr>
-                                </table>
-                            </li>
-                            <li>
-                                <b>Add assignments</b>: Adds assignments of the form <b>a.field = b</b> to the code. Adding these assignments has the goal of fixing bugs such as forgetting to assign the value of the <b>next</b>-pointer in a linked list or not setting one of the children in a binary tree. These assignments will only be added under the condition that the declared type of <b>A.field</b> matches the declared type of <b>a</b>. This corresponds to the following code:
-                                <br>
-                                <pre>class A {<br>    A field;<br>    ...<br>}<br>A a = ...<br>A b = ...<br>a.field = b;</pre>
-                            </li>
-                            <li>
-                                <b>Switch field accesses</b>: Switches between different field accesses, such as replacing <b>a.left</b> with <b>a.right</b>. Switching between these field accesses has the goal of fixing bugs such as following the wrong subtree or setting values in the wrong subtree in tree structures. The BugFixer switches only between fields of the same declared type. This corresponds to the following code (although <b>left</b> and <b>right</b> could also be fields of another type, as long as they are of the same type):
-                                <br>
-                                <pre>class A {<br>    A left;<br>    A right;<br>    ...<br>}<br>A a = ...<br>a.left = ...<br>a.right = ...<br></pre>
-                            </li>
-                        </ul>
-                    </li>
-                </ol>
-            </div>
-
-            <div id="fixing_bugs">
-                <h5>Fixing Bugs</h5>
-                <p>Once correctly <a href="#initialization">initialized</a>, the BugFixer prototype can start working on fixing your bugs. The work-flow is as follows:
-                <ol>
-                    <li>
-                        <b>Input</b>: A new input is given to the system. There are multiple ways to get such an input. It can be given by the user, read from a file or be derived randomly.
-                    </li>
-                    <li>
-                        <b>Execute</b>: The different possible versions are executed, to see whether they fix the bugs. Versions which cause errors are immediately discarded, for other versions the next step follows.
-                    </li>
-                    <li>
-                        <b>Evaluate</b>: The user must evaluate the different versions as to whether they fix the bugs. Either a faulty model can be <a href="#model_editor">edited</a>, or yes-no questions may be answered until a correct version appears. If there are more than one version which lead to the correct result, these steps are repeated. If after a certain number of repetitions there is still more than one version, then the one with the least changes to the code is returned.
-                    </li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="model_editor">
-            <h4>Model Editor</h4>
-
-            <p>As part of the <a href="#bug_fixer">BugFixer</a> prototype, the model editor allows you to edit the graph on screen manually, in order to get a new model with which possibly fixed versions of the code can be compared. The model editor allows many edits to the graph, such that essentially any graph can be created. Note that this only edits the visual structure appearing on screen. It does not make any changes to the underlying heap, meaning that if you continue to the next breakpoint your changes will be lost.</p>
-            <p>The model editor can be invoked in the graph drawer. Right-click on an empty area and select <b>Edit the model</b>. The available actions can be grouped into three sections:</p>
-            <ul>
-                <li>
-                    <b>Dual-node actions</b>: To invoke dual-node actions, press <b>&#8679;</b> and drag one node onto another. The available actions will then be shown in a pop-up menu.
-                </li>
-                <li>
-                    <b>Single-node actions</b>: To invoke single-node actions, <b>right-click</b> any node. The available actions will then be shown in a pop-up menu.
-                </li>
-                <li>
-                    <b>No-node actions</b>: To invoke no-node actions, <b>right-click</b> any empty space. The available actions will then be shown in a pop-up menu.
-                </li>
-            </ul>
-            <p>The following dual-node actions are available:</p>
-            <ul>
-                <li>
-                    <b>Move subtree</b>: Allows to move one subtree to another node. A new name must be given to the new subtree, which may overwrite existing subtrees of the node. Applicable only if the two values are not directly related.
-                </li>
-                <li>
-                    <b>Move partial subtree</b>: Similar to move subtree, however not all children of the subtree root are moved. The children to move with the subtree must be manually selected.
-                </li>
-                <li>
-                    <b>Insert copy</b>: Inserts a copy of one value in another. Fields of the value are however not copied with it. A new name must be given of the field from the value to the copy. Applicable to any two values.
-                </li>
-                <li>
-                    <b>Swap fields</b>: Allows to swap two fields. Applicable only if the two values are siblings. The two fields to swap must come from the same parent. Additionally, the user can choose whether to swap these fields only for the selected nodes or for all nodes of that type.
-                </li>
-                <li>
-                    <b>Swap values</b>: Swaps the values stored in two nodes. The first value will afterwards store the value of the second and vice versa. Applicable to any two values.
-                </li>
-            </ul>
-            <p>The following single-node actions are available:</p>
-            <ul>
-                <li>
-                    <b>Remove value</b>: Completely removes a value. Removes it as a field from all parents, and removes all of its fields. Its fields will however stay in the graph if they are reachable on another path. If a variable points to the value, the variable is also removed. Applicable to any value.
-                </li>
-                <li>
-                    <b>Remove from parent</b>: Removes the value as a field of a parent. If the value is reachable on another path, it stays in the graph. Applicable to any value with at least one parent value.
-                </li>
-                <li>
-                    <b>Insert new value</b>: Allows the creation of a new value, which is then inserted as a field of this value. The name of the field must also be given. The new name may overwrite existing names, in which case one may give a new name to link the new value to the existing field. Applicable to any value or variable.
-                </li>
-                <li>
-                    <b>Rename field</b>: Allows to select any field of the value and rename it. The new name may overwrite an existing name. Applicable to any value with at least one field.
-                </li>
-                <li>
-                    <b>Rename variable</b>: Allows to rename a variable. Applicable to any variable.
-                </li>
-            </ul>
-            <p>The following no-node actions is available:</p>
-            <ul>
-                <li>
-                    <b>Insert null values</b>: A utility action which allows to insert multiple null values at once. The values and variables where to insert null as well as the field names must be given.
-                </li>
-            </ul>
-        </div>
 
     </div>
-</div>
 </body>
 
 
