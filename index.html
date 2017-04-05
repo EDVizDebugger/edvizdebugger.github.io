@@ -152,21 +152,4 @@
 
 </body>
 
-<script>
-    var clickCount = 0;
-
-    $("#edviz").click(function () {
-        clickCount++;
-        if (clickCount == 10) {
-            var a = $(this);
-            var prevHtml = a.html();
-            a.html("DETHViz");
-            setTimeout(function () {
-                a.html(prevHtml);
-            }, 2000);
-            clickCount = 0;
-        }
-    })
-</script>
-
 </html>
